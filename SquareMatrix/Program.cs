@@ -23,6 +23,7 @@ namespace Matrix
     {
         private int sideSize { get; set; }
         private int[,] matrix;
+        static Random RandomInt = new Random();
         public SquareMatrix(int sideSize)
         {
             this.sideSize = sideSize;
@@ -31,7 +32,6 @@ namespace Matrix
         }
         private void RandomizeMatrix()
         {
-            Random RandomInt = new Random();
             for (int rowIndex = 0; rowIndex < sideSize; ++rowIndex)
             {
                 for (int columnIndex = 0; columnIndex < sideSize; ++columnIndex)
@@ -406,28 +406,36 @@ namespace Matrix
     {
         static void Main(string[] args)
         {
-            SquareMatrix test = new SquareMatrix(4);
-            Console.WriteLine(test);
-            SquareMatrix test2 = new SquareMatrix(4);
-            Console.WriteLine(test2);
+            SquareMatrix firstExhibitionMatrix = new SquareMatrix(4);
+            Console.WriteLine(firstExhibitionMatrix);
+            SquareMatrix secondExhibitionMatrix = new SquareMatrix(4);
+            Console.WriteLine(secondExhibitionMatrix);
 
-            Console.WriteLine(test + test2);
-            Console.WriteLine(test > test2);
-            Console.WriteLine(test.Equals(test2));
-            Console.WriteLine(test.CompareTo(test2));
-            Console.WriteLine(test.GetHashCode());
-            Console.WriteLine(test.GetDeterminant(test));
-            Console.WriteLine(test.ReverseMatrix());
-            SquareMatrix test3 = new SquareMatrix(5);
-            Console.WriteLine(test3);
+            Console.WriteLine(firstExhibitionMatrix + secondExhibitionMatrix);
+            Console.WriteLine(firstExhibitionMatrix > secondExhibitionMatrix);
+            Console.WriteLine(firstExhibitionMatrix.Equals(secondExhibitionMatrix));
+            Console.WriteLine(firstExhibitionMatrix.CompareTo(secondExhibitionMatrix));
+            Console.WriteLine(firstExhibitionMatrix.GetHashCode());
+            Console.WriteLine(firstExhibitionMatrix.GetDeterminant(firstExhibitionMatrix));
+            Console.WriteLine(firstExhibitionMatrix.ReverseMatrix());
+
+            SquareMatrix thirdExhibitionMatrix = new SquareMatrix(5);
+            SquareMatrix fourthExhibitionMatrix = thirdExhibitionMatrix.Clone() as SquareMatrix;
+            Console.WriteLine(thirdExhibitionMatrix);
             try
             {
-                Console.WriteLine(test + test3);
+                Console.WriteLine(firstExhibitionMatrix + thirdExhibitionMatrix);
             }
             catch (Exception Error) 
             {
                 Console.WriteLine(Error.Message);
-            }
+            };
+            Console.WriteLine("\n");
+            Console.WriteLine(thirdExhibitionMatrix.GetHashCode());
+            Console.WriteLine(fourthExhibitionMatrix.GetHashCode());
+            Console.WriteLine("\n");
+            Console.WriteLine(thirdExhibitionMatrix);
+            Console.WriteLine(fourthExhibitionMatrix);
             Console.ReadLine();
         }
     }
