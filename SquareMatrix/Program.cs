@@ -350,6 +350,11 @@ namespace Matrix
             return true;
         }
 
+        public static explicit operator string(SquareMatrix matrix)
+        {
+            return matrix.ToString();
+        }
+
         public SquareMatrix GetSubMatrix(int columnFromMatrix, SquareMatrix mainMatrix)
         {
             SquareMatrix subMatrix = new SquareMatrix(mainMatrix._sideSize - 1);
@@ -368,15 +373,15 @@ namespace Matrix
         public int GetDeterminant(SquareMatrix squareMatrix)
         {
 
-            int Determinant = 0;
+            int determinant = 0;
 
             if (squareMatrix.   _sideSize == 1)
             {
-                Determinant = squareMatrix._matrix[0, 0];
+                determinant = squareMatrix._matrix[0, 0];
             }
             else if (squareMatrix._sideSize == 2)
             {
-                Determinant = squareMatrix._matrix[0, 0] * squareMatrix._matrix[1, 1] - squareMatrix._matrix[0, 1] * squareMatrix._matrix[1, 0];
+                determinant = squareMatrix._matrix[0, 0] * squareMatrix._matrix[1, 1] - squareMatrix._matrix[0, 1] * squareMatrix._matrix[1, 0];
             }
             else
             {
@@ -384,13 +389,13 @@ namespace Matrix
                 {
                     int minor = Convert.ToInt32(Math.Pow(-1, columnIndex));
                     int ColumnNumber = minor * squareMatrix._matrix[0, columnIndex];
-                    SquareMatrix SubMatrix = GetSubMatrix(columnIndex, squareMatrix);
+                    SquareMatrix subMatrix = GetSubMatrix(columnIndex, squareMatrix);
 
-                    Determinant += ColumnNumber * GetDeterminant(SubMatrix);
+                    determinant += ColumnNumber * GetDeterminant(subMatrix);
                 }
             }
 
-            return Determinant;
+            return determinant;
         }
 
         public SquareMatrix ReverseMatrix()
